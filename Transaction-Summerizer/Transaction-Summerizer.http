@@ -1,0 +1,6 @@
+@Transaction_Summerizer_HostAddress = http://localhost:5043
+
+GET {{Transaction_Summerizer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
