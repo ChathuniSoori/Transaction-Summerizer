@@ -13,7 +13,7 @@ namespace Transaction_Summerizer_Services
 
     {
         private readonly SummerizerDbContext _context= new SummerizerDbContext();
-        public List<UserDTO> GetAllTransactions()
+        public List<Users> GetAllTransactions()
         {
             return _context.Users.ToList();
         }

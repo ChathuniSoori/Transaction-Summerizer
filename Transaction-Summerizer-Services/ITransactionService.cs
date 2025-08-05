@@ -7,6 +7,6 @@ namespace Transaction_Summerizer.Services
     {
         //UserDTO AddTransaction(UserDTO userDTO);
         //UserDTO GetTransactionById(int id);
-        public List<UserDTO> GetAllTransactions();
+        public List<Users> GetAllTransactions();
     }
 }

@@ -12,7 +12,7 @@ namespace Transaction_Summerizer_Persistance
     {
       
 
-        public DbSet<UserDTO> Users { get; set; }
+        public DbSet<Users> Users { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -25,18 +25,19 @@ namespace Transaction_Summerizer_Persistance
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Seed Categories first
-            modelBuilder.Entity<CategoryDTO>().HasData(
-                new CategoryDTO
+            modelBuilder.Entity<Categories>().HasData(
+                new Categories
                 {
                     ID = 1,
                     Name = CategoryType.Groceries,
                     Type = "Expense"
+
                 }
             );
 
             // Seed UserDTO using FK to Category
-            modelBuilder.Entity<UserDTO>().HasData(
-                new UserDTO
+            modelBuilder.Entity<Users>().HasData(
+                new Users
                 {
                     ID = 1,
                     Name = "Chathuni",

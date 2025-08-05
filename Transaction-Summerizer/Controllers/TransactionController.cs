@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Transaction_Summerizer.Services;
+using Transaction_Summerizer_Services.DTO;
+using AutoMapper;
 
 namespace Transaction_Summerizer.Controllers
 {
@@ -13,12 +15,34 @@ namespace Transaction_Summerizer.Controllers
     public class TransactionController : ControllerBase
     {
         private readonly ITransactionService _transactionService;
+        private readonly IMapper _mapper;
 
-        public TransactionController(ITransactionService transactionService)
+        public TransactionController(ITransactionService transactionService,IMapper mapper)
         {
             _transactionService = transactionService;
+            _mapper = mapper;
         }
+        [HttpGet]
+        public ActionResult<ICollection<UserDTO>> GetSummery()
+        {
+            var users = _transactionService.GetAllTransactions();
 
+            //var usersDto = new List<UserDTO>();
+            //foreach (var user in users)
+            //{
+            //    usersDto.Add(new UserDTO
+            //    {
+            //        ID = user.ID,
+            //        Name = user.Name,
+            //        TimeStamp = user.TimeStamp,
+            //        TotalSpent = user.TotalSpent,
+            //        Category = user.Category,
+            //        CategoryID = user.CategoryID,
+            //    });
+            //}
+            var mappedUsers=_mapper.Map<ICollection<UserDTO>>(users);
+            return Ok(mappedUsers);
+        }
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -3,15 +3,19 @@ using Transaction_Summerizer_Models;
 using Transaction_Summerizer.Services;
 using Transaction_Summerizer_Persistance;
 using Transaction_Summerizer_Services;
+using Microsoft.Extensions.DependencyInjection;
+using Transaction_Summerizer_Services.Profiles;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//Add services to the container
+// Add services to the container
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+// Correct AutoMapper registration
+builder.Services.AddAutoMapper(cfg => { }, typeof(UserProfile).Assembly);
 
 // Register custom service layer
 builder.Services.AddScoped<ITransactionService, TransactionSQLServerService>();
@@ -23,9 +27,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-
 }
-else
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

@@ -24,4 +24,8 @@
     <ProjectReference Include="..\Transaction-Summerizer-Models\Transaction-Summerizer-Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

@@ -22,7 +22,7 @@ namespace Transaction_Summerizer_Persistance.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Transaction_Summerizer_Models.CategoryDTO", b =>
+            modelBuilder.Entity("Transaction_Summerizer_Models.Categories", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -35,11 +35,12 @@ namespace Transaction_Summerizer_Persistance.Migrations
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("ID");
 
-                    b.ToTable("CategoryDTO");
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -50,7 +51,7 @@ namespace Transaction_Summerizer_Persistance.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Transaction_Summerizer_Models.UserDTO", b =>
+            modelBuilder.Entity("Transaction_Summerizer_Models.Users", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -58,12 +59,13 @@ namespace Transaction_Summerizer_Persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("CategoryID")
+                    b.Property<int?>("CategoryID")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("TimeStamp")
                         .HasColumnType("datetime2");
@@ -88,18 +90,16 @@ namespace Transaction_Summerizer_Persistance.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Transaction_Summerizer_Models.UserDTO", b =>
+            modelBuilder.Entity("Transaction_Summerizer_Models.Users", b =>
                 {
-                    b.HasOne("Transaction_Summerizer_Models.CategoryDTO", "Category")
+                    b.HasOne("Transaction_Summerizer_Models.Categories", "Category")
                         .WithMany("Users")
-                        .HasForeignKey("CategoryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryID");
 
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Transaction_Summerizer_Models.CategoryDTO", b =>
+            modelBuilder.Entity("Transaction_Summerizer_Models.Categories", b =>
                 {
                     b.Navigation("Users");
                 });
