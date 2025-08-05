@@ -11,24 +11,31 @@ namespace Transaction_Summerizer_Models
         public DateTime TimeStamp { get; set; }
         public double TotalSpent { get; set; }
 
-        public CategoryDTO Category { get; set; }
+        public int CategoryID { get; set; }               // FK
+        public CategoryDTO Category { get; set; }         // Navigation property
     }
 
     public class CategoryDTO
     {
-        public CategoryType Name { get; set; }  // enum instead of string
-        public string Type { get; set; } 
+        [Key]
+        public int ID { get; set; }
+        public CategoryType Name { get; set; }  // enum
+        public string Type { get; set; }
+
+        public ICollection<UserDTO> Users { get; set; }   // Optional: reverse navigation
     }
+
 
     public enum CategoryType
     {
-        Groceries,
-        Transport,
-        Entertainment,
-        Health,
-        Education,
-        Rent,
-        Shopping
+        Groceries,         // 0
+        Transport,         // 1
+        Entertainment,     // 2
+        Health,            // 3
+        Education,         // 4
+        Rent,              // 5
+        Shopping           // 6
     }
+
 
 }

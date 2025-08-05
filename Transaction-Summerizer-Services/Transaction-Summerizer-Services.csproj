@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Transaction-Summerizer-Models\Transaction-Summerizer-Models.csproj" />
+    <ProjectReference Include="..\Transaction-Summerizer-Persistance\Transaction-Summerizer-Persistance.csproj" />
   </ItemGroup>
 
 </Project>
